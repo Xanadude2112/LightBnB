@@ -81,7 +81,7 @@ const addUser = function (user) {
   `, // RETURNING *; will return the added user, including the auto-generated id
 [name, email, password])
 .then((result) => {
-  return result.rows;
+  return result.rows[0];
 })
 .catch((err) => {
   console.log(err.message);
@@ -183,19 +183,19 @@ queryString += `GROUP BY properties.id\n`;
 const addProperty = function (property) {
   const { owner_id, title, description, thumbnail_photo_url, cover_photo_url
     , cost_per_night, parking_spaces, number_of_bathrooms, number_of_bedrooms, country,
-  street, city, province, post_code, active } = property;
+  street, city, province, post_code } = property;
   return pool
   .query(`
   INSERT INTO properties (owner_id, title, description, thumbnail_photo_url, cover_photo_url
     , cost_per_night, parking_spaces, number_of_bathrooms, number_of_bedrooms, country,
-  street, city, province, post_code, active) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)
+  street, city, province, post_code) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
   RETURNING*; 
   `, // RETURNING *; will return the added user, including the auto-generated id
 [owner_id, title, description, thumbnail_photo_url, cover_photo_url
   , cost_per_night, parking_spaces, number_of_bathrooms, number_of_bedrooms, country,
-street, city, province, post_code, active])
+street, city, province, post_code])
 .then((result) => {
-  return result.rows;
+  return result.rows[0];
 })
 .catch((err) => {
   console.log(err.message);
