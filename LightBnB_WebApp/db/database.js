@@ -81,7 +81,6 @@ const addUser = function (user) {
   `, // RETURNING *; will return the added user, including the auto-generated id
 [name, email, password])
 .then((result) => {
-  console.log(result.rows);
   return result.rows;
 })
 .catch((err) => {
@@ -140,25 +139,25 @@ const getAllProperties = function (options, limit = 10) {
   if (options.city) {
     queryParams.push(`%${options.city}%`);
     queryString += `AND city LIKE $${queryParams.length} `;
-  } 
+  } ;
   
   if (options.owner_id){
     queryParams.push(options.owner_id);
     queryString += `AND owner_id = $${queryParams.length} `;
-  } 
+  } ;
   
   if (options.minimum_price_per_night && options.maximum_price_per_night){
     queryParams.push(parseInt(options.minimum_price_per_night, 10) * 100);
     queryParams.push(parseInt(options.maximum_price_per_night, 10) * 100);
     queryString += `AND (cost_per_night >= $${queryParams.length - 1} AND cost_per_night <= $${queryParams.length}) `;
-}
+};
 
 queryString += `GROUP BY properties.id\n`;
 
   if (options.minimum_rating) {
     queryParams.push(parseInt(options.minimum_rating, 10));
     queryString += `HAVING avg(property_reviews.rating) >= $${queryParams.length}`;
-  }
+  };
 
   //Add any query that comes after the WHERE clause
   queryParams.push(limit);
@@ -196,7 +195,6 @@ const addProperty = function (property) {
   , cost_per_night, parking_spaces, number_of_bathrooms, number_of_bedrooms, country,
 street, city, province, post_code, active])
 .then((result) => {
-  console.log(result.rows);
   return result.rows;
 })
 .catch((err) => {
