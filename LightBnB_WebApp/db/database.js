@@ -126,20 +126,57 @@ const getAllReservations = function (guest_id, limit = 10) {
  * @return {Promise<[{}]>}  A promise to the properties.
  */
 const getAllProperties = function (options, limit = 10) {
-  return pool // be sure to return the entire query itself not just the resolve. WHY?
-  // When getAllProperties is called in the apiRoutes.js file, it is chained to .then, which can only consume a promise.
-    .query(
-      `SELECT *
-       FROM properties
-       LIMIT $1`,
-      [limit])
-    .then((result) => {
-      console.log(result.rows);
-      return result.rows;
-    })
-    .catch((err) => {
-      console.log(err.message);
-    });
+  //Setup an array to hold any parameters that may be available for the query
+  const queryParams = [];
+  // Start the query with all information that comes before the WHERE clause
+  let queryString = `
+  SELECT properties.*, avg(property_reviews.rating) as average_rating
+  FROM properties
+  JOIN property_reviews ON properties.id = property_id
+  WHERE 1 = 1
+  `; //WHERE 1=1 is meant to give SQL a dummy true so that it can carry on with the AND WHERE's in the conditionals
+
+  // Check if a city has been passed in as an option, add the city to the params array and create a WHERE clause for the city
+  if (options.city) {
+    queryParams.push(`%${options.city}%`);
+    queryString += `AND WHERE city LIKE $${queryParams.length} `;
+  } 
+  
+  if (options.owner_id){
+    queryParams.push(options.owner_id);
+    queryString += `AND WHERE owner_id = $${queryParams.length} `;
+  } 
+  
+  if (options.minimum_price_per_night){
+    queryParams.push(parseInt(options.minimum_price_per_night, 10) * 100);
+    queryString += `AND cost_per_night >= $${queryParams.length} `;
+  }
+
+  if (options.maximum_price_per_night){
+    queryParams.push(parseInt(options.maximum_price_per_night, 10) * 100);
+    queryString += `AND cost_per_night <= $${queryParams.length} `;
+  }
+
+  if (options.minimum_rating) {
+    queryParams.push(parseInt(options.minimum_rating, 10));
+    queryString += `AND rating >= $${queryParams.length}`;
+  }
+
+  //Add any query that comes after the WHERE clause
+  queryParams.push(limit);
+  queryString += `
+  GROUP BY properties.id
+  ORDER BY cost_per_night
+  LIMIT $${queryParams.length};
+  `;
+  console.log(queryString, queryParams);
+
+  // Run the query
+  return pool.query(queryString, queryParams)
+  .then((res) => res.rows)
+  .catch((err) => {
+      console.log(err.stack );
+  });
   };
 
 /**
