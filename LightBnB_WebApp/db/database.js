@@ -159,7 +159,7 @@ const getAllProperties = function (options, limit = 10) {
 
   if (options.minimum_rating) {
     queryParams.push(parseInt(options.minimum_rating, 10));
-    queryString += `AND average_rating >= $${queryParams.length}`;
+    queryString += `HAVING avg(property_reviews.rating) >= $${queryParams.length}`;
   }
 
   //Add any query that comes after the WHERE clause
