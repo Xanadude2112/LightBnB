@@ -157,6 +157,8 @@ const getAllProperties = function (options, limit = 10) {
     queryString += `AND cost_per_night <= $${queryParams.length} `;
   }
 
+queryString += `GROUP BY properties.id\n`;
+
   if (options.minimum_rating) {
     queryParams.push(parseInt(options.minimum_rating, 10));
     queryString += `HAVING avg(property_reviews.rating) >= $${queryParams.length}`;
@@ -165,7 +167,6 @@ const getAllProperties = function (options, limit = 10) {
   //Add any query that comes after the WHERE clause
   queryParams.push(limit);
   queryString += `
-  GROUP BY properties.id
   ORDER BY cost_per_night
   LIMIT $${queryParams.length};
   `;
