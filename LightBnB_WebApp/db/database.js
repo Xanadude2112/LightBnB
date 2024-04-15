@@ -147,15 +147,11 @@ const getAllProperties = function (options, limit = 10) {
     queryString += `AND owner_id = $${queryParams.length} `;
   } 
   
-  if (options.minimum_price_per_night){
+  if (options.minimum_price_per_night && options.maximum_price_per_night){
     queryParams.push(parseInt(options.minimum_price_per_night, 10) * 100);
-    queryString += `AND cost_per_night >= $${queryParams.length} `;
-  }
-
-  if (options.maximum_price_per_night){
     queryParams.push(parseInt(options.maximum_price_per_night, 10) * 100);
-    queryString += `AND cost_per_night <= $${queryParams.length} `;
-  }
+    queryString += `AND (cost_per_night >= $${queryParams.length - 1} AND cost_per_night <= $${queryParams.length}) `;
+}
 
 queryString += `GROUP BY properties.id\n`;
 
