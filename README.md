@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # LightBnB Project
 
 LightBnB is a simple, multi-page Airbnb clone that focuses mainly on the use of SQL for storing data in a database. Other languages and packages used here are JavaScript, HTML5, and CSS just to name a few.
@@ -49,3 +50,6 @@ On this site, you can find an extremely simple design as it was not intended to 
 ## DevDependencies
 
 - Nodemon
+=======
+
+>>>>>>> 22fa93353b49f513922534d07b96039ddc333173
