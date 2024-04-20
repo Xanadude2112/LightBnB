@@ -165,8 +165,6 @@ queryString += `GROUP BY properties.id\n`;
   ORDER BY cost_per_night
   LIMIT $${queryParams.length};
   `;
-  console.log(queryString, queryParams);
-
   // Run the query
   return pool.query(queryString, queryParams)
   .then((res) => res.rows)
