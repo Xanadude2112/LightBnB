@@ -235,6 +235,7 @@ const addProperty = function(property) {
       ]
     )
     .then((result) => {
+      console.log(result)
       return result.rows[0];
     })
     .catch((err) => {
