@@ -14,28 +14,22 @@ On this site, you can find an extremely simple design as it was not intended to 
 
 ## Final Product
 
-!["Screenshot of LightBnB sign in / log in page"](https://github.com/Xanadude2112/tweeter/blob/main/docs/tweeter-error.png?raw=true)
+!["Screenshot of LightBnB sign in / log in page"](https://github.com/Xanadude2112/LightBnB/blob/master/docs/sign-in.png)
 
-!["Screenshot of LightBnB filtered search page"](https://github.com/Xanadude2112/tweeter/blob/main/docs/tweeter-error2.png?raw=true)
+!["Screenshot of LightBnB filtered search page"](https://github.com/Xanadude2112/LightBnB/blob/master/docs/search.png)
 
-!["Screenshot of LightBnB sign in / log in page"](https://github.com/Xanadude2112/tweeter/blob/main/docs/tweeter3.png?raw=true)
+!["Screenshot of LightBnB create listing page"](https://github.com/Xanadude2112/LightBnB/blob/master/docs/create-listing.png)
 
-!["Screenshot of LightBnB sign in / log in page"](https://github.com/Xanadude2112/tweeter/blob/main/docs/tweeter2.png?raw=true)
+!["Screenshot of LightBnB reservations page"](https://github.com/Xanadude2112/LightBnB/blob/master/docs/reservations.png)
 
-!["Screenshot of LightBnB sign in / log in page"](https://github.com/Xanadude2112/tweeter/blob/main/docs/tweeter.png?raw=true)
-
-!["Screenshot of LightBnB sign in / log in page"](https://github.com/Xanadude2112/tweeter/blob/main/docs/tweeter-ipad.png?raw=true)
-
-!["Screenshot of LightBnB sign in / log in page"](https://github.com/Xanadude2112/tweeter/blob/main/docs/tweeter-ipad2.png?raw=true)
-
+!["Screenshot of LightBnB main page"](https://github.com/Xanadude2112/LightBnB/blob/master/docs/main-page.png)
 
 ## Getting Started
 
-1. [Create](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) a new repository using this repository as a template.
-2. Clone your repository onto your local device.
+1. Fork and clone your repository onto your local device.
 3. Install dependencies using the `npm install` command.
-3. Start the web server using the `npm run local` command. The app will be served at <http://localhost:8080/>.
-4. Go to <http://localhost:8080/> in your browser.
+3. Start the web server using the `npm run local` command. The app will be served at <http://localhost:3000/>.
+4. Go to <http://localhost:3000/> in your browser.
 
 ## Dependencies
 
